@@ -1,10 +1,13 @@
 :root {
-  --bg: #0b0b0c;
-  --surface: #151517;
-  --text: #ededee;
-  --muted: #9a9aa0;
-  --accent: #7c5cff;
   --max-width: 1000px;
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --border: #262626;
+  --text: #e5e5e5;
+  --muted: #8a8a8a;
+  --accent: #a3e635;        /* prompt symbol, links, primary button, cursor */
+  --accent-hover: #bef264;  /* lighter lime for hover */
+  --accent-press: #84cc16;  /* darker lime for pressed state */
 }
 
 * {
