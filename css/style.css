@@ -17,7 +17,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 body {
@@ -52,8 +52,8 @@ nav a:hover {
 }
 
 section {
-  max-width: var(--max-width);
-  margin: 0 auto;
+  /* max-width: var(--max-width); */
+  /* margin: 0 auto; */
   padding: 5rem 1.5rem;
 }
 
@@ -80,20 +80,37 @@ footer {
 
 html, body {
   height: 100%;
-  margin: 0;
-  overflow: hidden;  /* stops the page itself scrolling vertically */
+  overflow: hidden; /* page itself never scrolls */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  flex: none;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
 }
 
 .track {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: hidden;  
-  overflow-x: auto; /* allows horizontal scrolling */
+  flex: 1;
+  min-height: 0;        /* lets the track shrink to fit between header and footer */
+  display: flex;        /* row by default: sections sit side by side */
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* scroll-behavior: smooth; */
 }
 
 .track section {
-  flex: 0 0 100vw; /* each section takes full width */
-  height: 100vh;
-  /* overflow-y: auto; /* allows vertical scrolling within each section */
+  flex: 0 0 100vw;      /* each section is one full screen wide */
+  overflow-y: auto;     /* a tall section scrolls on its own */
+  /* keeps text in a centered column even though the section is full width */
+  padding-inline: max(1.5rem, calc((100vw - var(--max-width)) / 2));
+}
+
+footer {
+  flex: none;
+  padding: 1rem;
 }
