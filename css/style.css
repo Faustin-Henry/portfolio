@@ -114,3 +114,10 @@ footer {
   flex: none;
   padding: 1rem;
 }
+
+.track {
+  scrollbar-width: none;        /* Firefox */
+}
+.track::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari, Edge */
+}
