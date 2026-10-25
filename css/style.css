@@ -99,15 +99,18 @@ header {
   min-height: 0;        /* lets the track shrink to fit between header and footer */
   display: flex;        /* row by default: sections sit side by side */
   overflow-x: auto;
-  overflow-y: hidden;
-  /* scroll-behavior: smooth; */
+  overflow-y: hidden;   /* scroll-behavior: smooth; */
+  scroll-snap-type: x mandatory;   /* NEW: always settle on a section */
+  scroll-behavior: smooth;         /* NEW: uncomment/enable smooth gliding */
 }
 
 .track section {
   flex: 0 0 100vw;      /* each section is one full screen wide */
   overflow-y: auto;     /* a tall section scrolls on its own */
   /* keeps text in a centered column even though the section is full width */
-  padding-inline: max(1.5rem, calc((100vw - var(--max-width)) / 2));
+  padding-inline: max(1.5rem, calc((100vw - var(--max-width)) / 2)); 
+  scroll-snap-align: start;        /* NEW: section's left edge locks to the screen's left edge */
+  scroll-snap-stop: always;        /* NEW: a fast swipe can't skip over a section */
 }
 
 footer {
