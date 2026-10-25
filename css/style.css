@@ -99,15 +99,18 @@ header {
   min-height: 0;        /* lets the track shrink to fit between header and footer */
   display: flex;        /* row by default: sections sit side by side */
   overflow-x: auto;
-  overflow-y: hidden;
-  /* scroll-behavior: smooth; */
+  overflow-y: hidden;   /* scroll-behavior: smooth; */
+  scroll-snap-type: x mandatory;   /* NEW: always settle on a section */
+  scroll-behavior: smooth;         /* NEW: uncomment/enable smooth gliding */
 }
 
 .track section {
   flex: 0 0 100vw;      /* each section is one full screen wide */
   overflow-y: auto;     /* a tall section scrolls on its own */
   /* keeps text in a centered column even though the section is full width */
-  padding-inline: max(1.5rem, calc((100vw - var(--max-width)) / 2));
+  padding-inline: max(1.5rem, calc((100vw - var(--max-width)) / 2)); 
+  scroll-snap-align: start;        /* NEW: section's left edge locks to the screen's left edge */
+  scroll-snap-stop: always;        /* NEW: a fast swipe can't skip over a section */
 }
 
 footer {
@@ -120,4 +123,36 @@ footer {
 }
 .track::-webkit-scrollbar {
   display: none;                /* Chrome, Safari, Edge */
+}
+
+
+/* ---------- Page reveal animation ---------- */
+
+/* Hidden state (only applies when JS is running, see main.js) */
+.js .track section > * {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Visible state, added by JS when the section is in view */
+.js .track section.visible > * {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger: each element in a section appears slightly after the last */
+.track section.visible > *:nth-child(1) { transition-delay: 0.10s; }
+.track section.visible > *:nth-child(2) { transition-delay: 0.20s; }
+.track section.visible > *:nth-child(3) { transition-delay: 0.30s; }
+.track section.visible > *:nth-child(4) { transition-delay: 0.40s; }
+.track section.visible > *:nth-child(5) { transition-delay: 0.50s; }
+
+/* Skip the animation for people who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .js .track section > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
