@@ -126,6 +126,41 @@ footer {
 }
 
 
+#about p {
+  font-family: 'Inter', sans-serif;
+  color: #e5e5e5;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  max-width: 60ch;
+}
+
+.section-title {
+  font-family: 'JetBrains Mono', monospace;
+  color: #e5e5e5;
+}
+
+.accent { color: #A3E635; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+}
+
+.about-facts {
+  list-style: none;
+  padding: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: #737373;
+}
+
+.about-facts li { margin-bottom: 0.75rem; }
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; }
+}
+
 /* ---------- Page reveal animation ---------- */
 
 /* Hidden state (only applies when JS is running, see main.js) */
