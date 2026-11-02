@@ -1,81 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Faustin Mugassa, Computer Science student at UPEI.">
-  <title>Faustin Mugassa | Portfolio</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Faustin Mugassa — CS Student & UX/UI Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0a0a0a;--tx:#e5e5e5;--mu:#737373;--ac:#A3E635;--bd:#222;--mono:'JetBrains Mono',ui-monospace,Consolas,monospace;--sans:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:var(--bg);color:var(--tx);font-family:var(--sans);overflow:hidden}
+header{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) 5vw 18px;background:rgba(10,10,10,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd);font-family:var(--mono);font-size:14px}
+header b{color:var(--ac)}
+nav{display:flex;gap:22px}
+nav a{color:var(--mu);cursor:pointer;text-decoration:none;transition:color .2s}
+nav a:hover,nav a.on{color:var(--ac)}
+main{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+main::-webkit-scrollbar{display:none}
+section{flex:0 0 100vw;height:100%;scroll-snap-align:start;padding:110px 8vw 60px;overflow-y:auto;display:flex;flex-direction:column;justify-content:center}
+.r{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+section.in .r{opacity:1;transform:none}
+section.in .r:nth-child(2){transition-delay:.12s}section.in .r:nth-child(3){transition-delay:.24s}section.in .r:nth-child(4){transition-delay:.36s}
+.tag{font-family:var(--mono);color:var(--ac);font-size:14px;margin-bottom:14px}
+h1{font-family:var(--mono);font-size:clamp(32px,5vw,64px);line-height:1.1;max-width:15em}
+h1 span{color:var(--ac)}
+h2{font-family:var(--mono);font-size:clamp(24px,3vw,36px);margin-bottom:28px}
+h2:before{content:'> ';color:var(--ac)}
+p{color:#b5b5b5;line-height:1.7;max-width:46em;margin-bottom:14px}
+.lead{font-size:18px;margin-top:22px}
+.btns{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:14px;padding:12px 20px;border:1px solid var(--ac);color:var(--ac);background:none;cursor:pointer;text-decoration:none;transition:.2s}
+.btn:hover{background:var(--ac);color:#0a0a0a}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;max-width:1100px}
+.card{border:1px solid var(--bd);padding:22px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--ac);transform:translateY(-3px)}
+.card h3{font-family:var(--mono);font-size:16px;margin-bottom:4px}
+.card small{font-family:var(--mono);color:var(--mu);font-size:12px;display:block;margin-bottom:12px}
+.card p{font-size:14px;margin:0}
+.wip{border-style:dashed;opacity:.75}
+.badge{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--ac);border:1px solid var(--ac);padding:2px 8px;margin-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;max-width:46em}
+.chips span{font-family:var(--mono);font-size:13px;padding:6px 12px;border:1px solid var(--bd);color:var(--tx)}
+a.l{color:var(--ac);text-decoration:none}a.l:hover{text-decoration:underline}
+.cl{font-family:var(--mono);font-size:16px;line-height:2.1}
+.cl span{color:var(--mu);display:inline-block;width:90px}
+@media(max-width:760px){
+ html,body{overflow:auto}
+ header{position:sticky}
+ nav{gap:12px;font-size:12px}
+ main{display:block;height:auto;overflow:visible}
+ section{height:auto;min-height:0;padding:50px 6vw}
+ .r{opacity:1;transform:none}
+}
+@media(prefers-reduced-motion:reduce){.r{transition:none}main{scroll-behavior:auto}}
+</style>
 </head>
 <body>
+<header><div><b>~/</b>faustin</div>
+<nav><a data-i="0" class="on">home</a><a data-i="1">about</a><a data-i="2">myWork</a><a data-i="3">projects</a><a data-i="4">contact</a></nav></header>
+<main id="m">
 
-  <header>
-    <nav>
-      <a href="#home" class="logo">Faustin Mugassa</a>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#myWork">My Work</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main class = "track">
-    <section id="home">
-      <h1>Hi, I'm Faustin.</h1>
-      <h2>Computer Science Student &amp; UX/UI Designer</h2>
-      <p>I design and build clean, user-focused digital experiences.</p>
-      <a href="#projects"> see my work </a>
+<section id="home" class="in">
+ <div class="tag r">$ whoami</div>
+ <h1 class="r">Hi, I'm Faustin.<br><span>Computer Science Student &amp; UX/UI Designer</span></h1>
+ <p class="lead r">Third-year CS student at UPEI who tests, designs and builds software, and cares about how real people experience it. Currently a Software QA Tester Intern at Lawly.</p>
+ <div class="btns r"><a class="btn" data-i="2">view my work</a><a class="btn" data-i="4">get in touch</a></div>
 </section>
 
-    <section id="about">
-      <h2 class="section-title"><span class="accent">01.</span> About me</h2>
+<section id="about">
+ <h2 class="r">about</h2>
+ <p class="r">I'm a Computer Science student at the University of Prince Edward Island (expected 2028), originally from Tanzania and now based in Charlottetown, PE. My foundation is in data structures and algorithms, and my comparative programming languages course taught me to pick up new languages quickly.</p>
+ <p class="r">I move between engineering and design: I test software for a living, design interfaces in Figma, and make digital art in my spare time. I use AI as a learning and coding partner, and I check its output through testing and review rather than trusting it blindly. More recently I've started building with Arduino and Raspberry Pi to learn how software behaves on real devices.</p>
+ <div class="r"><p style="margin-bottom:6px;color:var(--mu);font-family:var(--mono);font-size:13px">// tech stack</p>
+ <div class="chips"><span>Java</span><span>Python</span><span>JavaScript</span><span>C</span><span>HTML/CSS</span><span>Git/GitHub</span><span>Figma</span><span>IntelliJ</span><span>VS Code</span><span>Gradle</span><span>Arduino</span><span>Raspberry Pi</span></div></div>
+</section>
 
-      <div class="about-grid">
-        <div class="about-text">
-          <p>I like building visually stunning designs that actually work. I started with interface design and front-end code, then went deeper into algorithms, data structures, and machine learning. I care about clean, usable products and getting the small details right.</p>
+<section id="work">
+ <h2 class="r">myWork</h2>
+ <div class="grid r">
+  <div class="card"><h3>Software QA Tester Intern</h3><small>Lawly · Remote · 2026 – present</small><p>Test a marketplace platform connecting law school applicants with admissions consultants. Write reproducible bug reports, verify fixes, and work with developers and product to improve test coverage.</p></div>
+  <div class="card"><h3>QA Engineer Intern</h3><small>inalipa inc · Jun – Sep 2023</small><p>Ran alpha testing on the B2CB platform, cutting bugs by 20% and catching critical issues missed in earlier phases.</p></div>
+  <div class="card"><h3>Junior Front-End Developer Intern</h3><small>inalipa inc · Sep 2022 – Sep 2023</small><p>Built a responsive B2B website that went live, and designed the web and mobile UX/UI for inalipa's first B2CB platform in Figma.</p></div>
+  <div class="card wip"><h3>UX/UI Case Study: inalipa</h3><small>Figma · design process</small><p>Full walkthrough of the B2B and B2CB designs.</p><span class="badge">under construction</span></div>
+ </div>
+</section>
 
-          <p>I'm a third-year BSc Computer Science student at the University of Prince Edward Island. At <strong>Inalipa Inc.</strong>, I designed UX/UI in Figma for a B2C platform, built front-end pages for a B2B website, and worked as a QA engineer on the B2C platform, where my testing helped cut bugs by about <span class="accent">20%</span>. I'm now looking for internship roles where I can keep growing.</p>
+<section id="projects">
+ <h2 class="r">projects</h2>
+ <div class="grid r">
+  <div class="card"><h3>Data Structures &amp; Algorithms</h3><small>Java · Gradle · GitHub</small><p>Sorting, graph algorithms (BFS/DFS, Dijkstra, Kruskal, Prim), hash tables, BSTs, LLRB trees and heaps.</p><p style="margin-top:12px"><a class="l" href="https://github.com/Faustin-Henry" target="_blank" rel="noopener">view on GitHub →</a></p></div>
+  <div class="card"><h3>Lost Artifacts</h3><small>CS3110 · game design pitch</small><p>A game concept about time-hopping bandits across ancient civilizations.</p><span class="badge">under construction</span></div>
+  <div class="card"><h3>Portfolio Website</h3><small>HTML · CSS · JavaScript</small><p>This site: a minimal, dark, horizontally scrolling portfolio. The build process is documented on my GitHub.</p></div>
+  <div class="card wip"><h3>Arduino &amp; Raspberry Pi</h3><small>hardware · in progress</small><p>Learning how software behaves on real devices and constraints.</p><span class="badge">under construction</span></div>
+  <div class="card wip"><h3>Digital Art</h3><small>character art · portraits · environments</small><p>A gallery of my digital paintings.</p><span class="badge">under construction</span></div>
+ </div>
+</section>
 
-          <p>Outside class, I digital-paint characters and environments, draft game ideas, work on side projects and business ideas, and play third-person RPGs.</p>
+<section id="contact">
+ <h2 class="r">contact</h2>
+ <p class="r">I'm looking for software engineering internship opportunities. The best way to reach me is by email.</p>
+ <div class="cl r">
+  <div><span>email</span><a class="l" href="mailto:contact@faustinhenry.com">contact@faustinhenry.com</a></div>
+  <div><span>github</span><a class="l" href="https://github.com/Faustin-Henry" target="_blank" rel="noopener">github.com/Faustin-Henry</a></div>
+  <div><span>linkedin</span><a class="l" href="https://linkedin.com/in/faustin-mugassa-67b657213" target="_blank" rel="noopener">faustin-mugassa</a></div>
+  <div><span>location</span>Charlottetown, PE</div>
+ </div>
+</section>
 
-          <p>I grew up in Dar es Salaam, Tanzania, and now call Charlottetown a second home. I also volunteer with an East African community organization here.</p>
-        </div>
-
-        <ul class="about-facts">
-          <li><span class="accent">&gt;</span> Studying: Computer Science @ UPEI</li>
-          <li><span class="accent">&gt;</span> Focus: UX/UI, front-end, ML</li>
-          <li><span class="accent">&gt;</span> Looking for: internships</li>
-          <li><span class="accent">&gt;</span> Based in: Charlottetown, PEI</li>
-        </ul>
-      </div>
-    </section>
-      
-    <section id="myWork">
-      <h2>My Work</h2>
-      <p>Details about your work experience go here.</p>
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-      <article>
-        <h3>Project name</h3>
-        <p>One-line description. Tech used.</p>
-      </article>
-    </section>
-
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email and links go here.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2026 Faustin Mugassa</p>
-  </footer>
-
-  <script src="js/main.js"></script>
+</main>
+<script>
+const m=document.getElementById('m'),S=[...m.querySelectorAll('section')],L=[...document.querySelectorAll('nav a')];
+const wide=()=>innerWidth>760;
+const go=i=>{i=Math.max(0,Math.min(S.length-1,i));wide()?m.scrollTo({left:i*m.clientWidth}):S[i].scrollIntoView({behavior:'smooth'})};
+document.querySelectorAll('[data-i]').forEach(a=>a.addEventListener('click',()=>go(+a.dataset.i)));
+const cur=()=>Math.round(m.scrollLeft/m.clientWidth);
+let lock=false;
+m.addEventListener('wheel',e=>{
+ if(!wide())return;
+ if(e.target.closest('section')&&Math.abs(e.deltaY)<Math.abs(e.deltaX))return;
+ e.preventDefault();
+ if(lock||Math.abs(e.deltaY)<8)return;
+ lock=true;go(cur()+(e.deltaY>0?1:-1));setTimeout(()=>lock=false,700);
+},{passive:false});
+addEventListener('keydown',e=>{if(!wide())return;if(e.key==='ArrowRight')go(cur()+1);if(e.key==='ArrowLeft')go(cur()-1)});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');const i=S.indexOf(e.target);L.forEach((a,k)=>a.classList.toggle('on',k===i))}}),{threshold:.5});
+S.forEach(s=>io.observe(s));
+</script>
 </body>
 </html>
