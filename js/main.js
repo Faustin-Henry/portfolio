@@ -1,53 +1,50 @@
-const track = document.querySelector('.track');
-const sections = document.querySelectorAll('.track section');
+const m = document.getElementById('m');
+const S = [...m.querySelectorAll('section')];
+const L = [...document.querySelectorAll('nav a')];
 
-// Lets the CSS hide content only when JS is working
-document.documentElement.classList.add('js');
+const wide = () => innerWidth > 760;
 
-// ---- Wheel: one gesture = one section ----
-const MIN_LOCK = 600;   // ms: at least this long after a jump (lets the glide finish)
-const IDLE_TIME = 200;  // ms: wheel must be quiet this long before unlocking
+// Navigate to section i (horizontal scroll on desktop, vertical on mobile)
+const go = i => {
+  i = Math.max(0, Math.min(S.length - 1, i));
+  wide()
+    ? m.scrollTo({ left: i * m.clientWidth })
+    : S[i].scrollIntoView({ behavior: 'smooth' });
+};
 
-let locked = false;
-let lockedAt = 0;
-let idleTimer;
+// Nav links and buttons
+document.querySelectorAll('[data-i]').forEach(a =>
+  a.addEventListener('click', () => go(+a.dataset.i))
+);
 
-function scheduleUnlock() {
-  clearTimeout(idleTimer);
-  const remainingMinLock = MIN_LOCK - (Date.now() - lockedAt);
-  idleTimer = setTimeout(() => { locked = false; }, Math.max(IDLE_TIME, remainingMinLock));
-}
+const cur = () => Math.round(m.scrollLeft / m.clientWidth);
 
-track.addEventListener('wheel', (e) => {
-  // only handle mostly-vertical wheel movement
-  if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+// Mouse wheel -> horizontal section changes
+let lock = false;
+m.addEventListener('wheel', e => {
+  if (!wide()) return;
+  if (e.target.closest('section') && Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
   e.preventDefault();
-
-  // Still locked: this is momentum from the same gesture.
-  // Every extra event pushes the unlock time back.
-  if (locked) {
-    scheduleUnlock();
-    return;
-  }
-
-  const direction = e.deltaY > 0 ? 1 : -1;
-  const current = Math.round(track.scrollLeft / track.clientWidth);
-  const next = Math.max(0, Math.min(sections.length - 1, current + direction));
-
-  locked = true;
-  lockedAt = Date.now();
-  track.scrollTo({ left: next * track.clientWidth, behavior: 'smooth' });
-  scheduleUnlock();
+  if (lock || Math.abs(e.deltaY) < 8) return;
+  lock = true;
+  go(cur() + (e.deltaY > 0 ? 1 : -1));
+  setTimeout(() => lock = false, 700);
 }, { passive: false });
 
-// ---- Animate each section in when it scrolls into view ----
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    entry.target.classList.toggle('visible', entry.isIntersecting);
-  });
-}, {
-  root: track,
-  threshold: 0.5
+// Arrow keys
+addEventListener('keydown', e => {
+  if (!wide()) return;
+  if (e.key === 'ArrowRight') go(cur() + 1);
+  if (e.key === 'ArrowLeft') go(cur() - 1);
 });
 
-sections.forEach((section) => observer.observe(section));
+// Reveal animation + active nav highlight
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) {
+    e.target.classList.add('in');
+    const i = S.indexOf(e.target);
+    L.forEach((a, k) => a.classList.toggle('on', k === i));
+  }
+}), { threshold: .5 });
+
+S.forEach(s => io.observe(s));
