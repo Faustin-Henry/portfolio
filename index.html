@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <title>Faustin Mugassa — CS Student & UX/UI Designer</title>
+        <link rel="stylesheet" href="css/style.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -105,7 +106,8 @@
             </section>
 
         </main>
-        <script>
+        <script src="js/main.js"></script>
+        <!-- <script>
     const m=document.getElementById('m'),S=[...m.querySelectorAll('section')],L=[...document.querySelectorAll('nav a')];
     const wide=()=>innerWidth>760;
     const go=i=>{i=Math.max(0,Math.min(S.length-1,i));wide()?m.scrollTo({left:i*m.clientWidth}):S[i].scrollIntoView({behavior:'smooth'})};
@@ -122,6 +124,6 @@
     addEventListener('keydown',e=>{if(!wide())return;if(e.key==='ArrowRight')go(cur()+1);if(e.key==='ArrowLeft')go(cur()-1)});
     const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');const i=S.indexOf(e.target);L.forEach((a,k)=>a.classList.toggle('on',k===i))}}),{threshold:.5});
     S.forEach(s=>io.observe(s));
-        </script>
+        </script> -->
     </body>
 </html>
